@@ -1,0 +1,41 @@
+<div *ngIf="contactForm">
+  <h1>{{ isEditMode ? 'Edit' : 'Add' }} Contact</h1>
+  <div class="form-container">
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form ">
+    <div class="form-control">
+      <mat-form-field>
+        <input matInput placeholder="First Name" formControlName="firstName">
+        <mat-error *ngIf="contactForm.get('firstName')?.hasError('required')">
+          Name is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-control">
+      <mat-form-field>
+        <input matInput placeholder="LastName" formControlName="lastName">
+        <mat-error *ngIf="contactForm.get('lastName')?.hasError('required')">
+          Name is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-control">
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email">
+        <mat-error *ngIf="contactForm.get('email')?.hasError('required')">
+          Email is required
+        </mat-error>
+        <mat-error *ngIf="contactForm.get('email')?.hasError('email')">
+          Invalid email
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="actions">
+      <button mat-raised-button color="primary" type="submit">
+        {{ isEditMode ? 'Update' : 'Add' }} Contact
+      </button>
+      <button mat-raised-button (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>
